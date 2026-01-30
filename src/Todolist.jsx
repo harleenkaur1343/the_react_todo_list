@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { X } from "lucide-react";
 
 const Todolist = () => {
   const inputTask = useRef();
@@ -28,6 +29,10 @@ const Todolist = () => {
         todo.id === id ? { ...todo, done: !todo.done } : todo,
       ),
     );
+  };
+
+  const handleDeleteItem = (id) => {
+    setTodos((prev) => prev.filter((todo) => todo.id != id));
   };
 
   return (
@@ -66,6 +71,12 @@ const Todolist = () => {
             >
               {todo.item}
             </p>
+            <X
+              onClick={() => {
+                handleDeleteItem(todo.id);
+              }}
+              className="w-5 h-5 text-gray-500 hover:text-red-500 cursor-pointer"
+            />
           </li>
         ))}
       </ul>
