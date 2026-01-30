@@ -5,7 +5,6 @@ const Todolist = () => {
   const inputTask = useRef();
   const [todos, setTodos] = useState([]);
   const [error, setError] = useState(null);
-  const [strike, setStrike] = useState(false);
 
   //create
 
@@ -19,8 +18,9 @@ const Todolist = () => {
     //add to todo;
     setTodos((tds) => [
       ...tds,
-      { id: Math.round(Math.random() * 1000), item: value, done: false },
+      { id: crypto.randomUUID(), item: value, done: false },
     ]);
+    inputTask.current.value = "";
   };
 
   const toggleCheck = (id) => {
