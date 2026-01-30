@@ -60,9 +60,11 @@ const EditableTodo = () => {
       });
     }
 
-    if (e.key === "Backspace" && currtodo == "") {
+    if (e.key === "Backspace" && currtodo.item === "") {
       setTodos((prev) => prev.filter((t) => t.id !== currtodo.id));
+        
     }
+    console.log("Todos on keydown", todos)
   };
 
   return (
@@ -85,7 +87,7 @@ const EditableTodo = () => {
             ></input>
             <input
               ref={(el) => (inputRefs.current[todo.id] = el)}
-              className="text-lg focus:outline-none"
+              className={todo.done?"line-through text-lg focus:outline-none": "text-lg focus:outline-none"}
               autoFocus={todos.length === 1}
               value={todo.item}
               onKeyDown={(e) => handleKeyDown(e, todo)}
