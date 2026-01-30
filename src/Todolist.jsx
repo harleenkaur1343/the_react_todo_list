@@ -2,24 +2,19 @@ import { useState, useRef } from "react";
 
 const Todolist = () => {
   const inputTask = useRef();
-  //each todo structure
-  //checkbox - itemname, is done or not
-
-  /*<li>
-  <checkbox checked = {todo.done} value={todo.name}>
-  <p>{todo.name}</p>
-  {
-  id,
-  name,
-  done
-  }
-  */
-  //const [task,setTask] = useState('lol');
   const [todos, setTodos] = useState([]);
+  const [error, setError] = useState(null);
+  const [strike, setStrike] = useState(false);
+
   //create
 
   const handleAddItem = () => {
+    setError(null);
     const value = inputTask.current.value;
+
+    if (value === "") {
+      return setError("Please define a task");
+    }
     //add to todo;
     setTodos((tds) => [
       ...tds,
@@ -46,12 +41,12 @@ const Todolist = () => {
         ></input>
         <button
           onClick={handleAddItem}
-          className="bg-gray-600 text-white py-3 px-8 rounded-full"
+          className="bg-gray-600 text-white py-3 px-8 rounded-full hover:bg-blue-400"
         >
           Add
         </button>
       </div>
-
+      {error && <p className="text-red-700 mb-4">{error}</p>}
       <ul>
         {todos.map((todo) => (
           <li className="flex gap-3 items-center " key={todo.id}>
@@ -64,7 +59,13 @@ const Todolist = () => {
                 toggleCheck(todo.id);
               }}
             ></input>
-            <p className="mb-1 text-lg">{todo.item}</p>
+            <p
+              className={
+                todo.done ? "line-through mb-1 text-lg" : "mb-1 text-lg"
+              }
+            >
+              {todo.item}
+            </p>
           </li>
         ))}
       </ul>
