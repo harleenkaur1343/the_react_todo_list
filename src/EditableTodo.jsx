@@ -64,7 +64,7 @@ const EditableTodo = () => {
       setTodos((prev) => prev.filter((t) => t.id !== currtodo.id));
         
     }
-    console.log("Todos on keydown", todos)
+   // console.log("Todos on keydown", todos)
   };
 
   return (
@@ -73,7 +73,7 @@ const EditableTodo = () => {
         This is a practice To Do List{" "}
       </h1>
 
-      <ul className="my-8">
+      <ul className="my-8 flex flex-col justify-center items-center">
         {todos.map((todo) => (
           <li className="flex gap-3 items-center" key={todo.id}>
             <input
